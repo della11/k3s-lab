@@ -15,6 +15,8 @@ spec:
         app: k3sdemo-api
 
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: k3sdemo-api
           image: ghcr.io/della11/k3sdemo-api:1.0.0
