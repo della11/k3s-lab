@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k3sdemo-api-ingress
+
+spec:
+  rules:
+    - host: k3sdemo.local
+
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+
+            backend:
+              service:
+                name: k3sdemo-api-service
+                port:
+                  number: 80

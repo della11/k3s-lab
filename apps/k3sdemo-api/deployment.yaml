@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k3sdemo-api
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: k3sdemo-api
+
+  template:
+    metadata:
+      labels:
+        app: k3sdemo-api
+
+    spec:
+      containers:
+        - name: k3sdemo-api
+          image: ghcr.io/della11/k3sdemo-api:1.0.0
+
+          ports:
+            - containerPort: 8080
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
